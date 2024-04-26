@@ -39,9 +39,44 @@ class DBStorage:
                                              HBNB_MYSQL_DB))
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
+    
+    def get(self, cls, id):
+        """
+            query on the current database session
+            for one object
+        """
+        for clss in classes:
+            if cls is classes[clss] or cls is clss:
+                cls = cls if cls is classes[clss] else classes[clss]
+                objs = self.__session.query(cls).filter(cls.id == id)     
+                return objs
+        return None
+    
+    def count(self, cls=None):
+        """
+            query on the current database session
+            for counts of object of a class or all classes
+        """
+        count = 0
+
+        if cls is None:
+            for clss in classes:
+                cls = classes[clss]
+                count += self.__session.query(cls).all().count()
+            return count
+        
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                cls = cls if cls is classes[clss] else classes[clss]
+                count = self.__session.query(cls).all().count()
+                return count
+        
 
     def all(self, cls=None):
-        """query on the current database session"""
+        """
+            query on the current database session
+            for all objects of a class
+        """
         new_dict = {}
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
