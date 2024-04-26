@@ -23,6 +23,46 @@ class FileStorage:
     __file_path = "file.json"
     # dictionary - empty but will store all objects by <class name>.id
     __objects = {}
+    
+    def get(self, cls, id):
+        """ query for  one object """
+        if cls and (classes[cls] or cls in [*classes.keys()]):
+            for value in self.__objects.values():
+                if cls == value.__class__ or cls == value.__class__.__name__:
+                    if value.id == id:
+                        return value
+        return None
+    
+    def count(self, cls=None):
+        """ 
+            query to count object of a class
+            or all object in storage
+        """
+        count = 0
+        if cls and (classes[cls] or cls in [*classes.keys()]):
+            for value in self.__objects.values():
+                if cls == value.__class__ or cls == value.__class__.__name__:
+                    count += 1
+            return count
+        return len(self.__objects)
+        
+        
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
 
     def all(self, cls=None):
         """returns the dictionary __objects"""

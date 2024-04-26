@@ -66,7 +66,7 @@ class DBStorage:
             return count
         
         for clss in classes:
-            if cls is None or cls is classes[clss] or cls is clss:
+            if cls is classes[clss] or cls is clss:
                 cls = cls if cls is classes[clss] else classes[clss]
                 count = self.__session.query(cls).all().count()
                 return count
