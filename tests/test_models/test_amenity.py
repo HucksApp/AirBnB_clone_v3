@@ -2,7 +2,6 @@
 """
 Contains the TestAmenityDocs classes
 """
-
 from datetime import datetime
 import inspect
 import models
@@ -79,7 +78,7 @@ class TestAmenity(unittest.TestCase):
     def test_to_dict_creates_dict(self):
         """test to_dict method creates a dictionary with proper attrs"""
         am = Amenity()
-        print(am.__dict__)
+        #print(am.__dict__)
         new_d = am.to_dict()
         self.assertEqual(type(new_d), dict)
         self.assertFalse("_sa_instance_state" in new_d)
