@@ -26,7 +26,7 @@ class FileStorage:
     
     def get(self, cls, id):
         """ query for  one object """
-        if cls and (classes[cls] or cls in [*classes]):
+        if cls and (classes[cls] or cls in list(classes.keys())):
             for value in self.__objects.values():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     if value.id == id:
@@ -39,7 +39,7 @@ class FileStorage:
             or all object in storage
         """
         count = 0
-        if cls and (classes[cls] or cls in [*classes]):
+        if cls and (classes[cls] or cls in list(classes.keys())):
             for value in self.__objects.values():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     count += 1
