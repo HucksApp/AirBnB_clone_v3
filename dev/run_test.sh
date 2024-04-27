@@ -9,7 +9,7 @@ pep8 . && python3 -m unittest discover -v ./tests/ \
 	$(find ./web_static/styles -maxdepth 1 -name "*.css" -type f)
 
 # stores the return value
-ret_val=$?
+ret=$?
 
 # clears file.json
 > ./dev/file.json
@@ -18,4 +18,4 @@ ret_val=$?
 py3clean .
 
 # exits with status from tests
-exit "$ret_val"
+exit "$ret"
