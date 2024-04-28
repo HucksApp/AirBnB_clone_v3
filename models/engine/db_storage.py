@@ -39,7 +39,7 @@ class DBStorage:
                                              HBNB_MYSQL_DB))
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
-    
+
     def get(self, cls, id):
         """
             query on the current database session
@@ -51,7 +51,7 @@ class DBStorage:
                 objs = self.__session.query(cls).filter(cls.id == id)     
                 return objs
         return None
-    
+
     def count(self, cls=None):
         """
             query on the current database session
@@ -64,13 +64,12 @@ class DBStorage:
                 cls = classes[clss]
                 count += self.__session.query(cls).count()
             return count
-        
+
         for clss in classes:
             if cls is classes[clss] or cls is clss:
                 cls = cls if cls is classes[clss] else classes[clss]
                 count = self.__session.query(cls).count()
                 return count
-        
 
     def all(self, cls=None):
         """
