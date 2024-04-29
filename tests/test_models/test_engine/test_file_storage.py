@@ -9,6 +9,7 @@ from models import engine
 from models.engine.file_storage import FileStorage
 import json
 import os
+import subprocess
 
 User = models.user.User
 BaseModel = models.base_model.BaseModel
@@ -17,7 +18,8 @@ storage = models.storage
 
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 Fdev = './dev/file.json'
-Fsto = './file.json'
+
+Fsto = './test.json'
 F = Fdev if os.path.isfile(Fdev) else Fsto
 
 @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
