@@ -17,10 +17,10 @@ FileStorage = engine.file_storage.FileStorage
 storage = models.storage
 
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
-Fdev = './dev/file.json'
+F = './file.json'
 
-Fsto = './test.json'
-F = Fdev if os.path.isfile(Fdev) else Fsto
+
+
 
 @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
 class TestFileStorageDocs(unittest.TestCase):
@@ -83,11 +83,21 @@ class TestBmFsInstances(unittest.TestCase):
         print('...... Testing FileStorate ......')
         print('..... For FileStorage Class .....')
         print('.................................\n\n')
+        if os.path.isfile(F):
+            cmd = "m=$(pwd);sudo mv $m/file.json $m/tmp.json && touch $m/file.json"
+            subprocess.run(cmd, shell = True, executable="/bin/bash")
+
+    @classmethod
+    def tearDownClass(cls):
+        if os.path.isfile(F):
+            cmd = "m=$(pwd);sudo rm $m/file.json;mv $m/tmp.json $m/file.json"
+            subprocess.run(cmd, shell = True, executable="/bin/bash")
 
     def setUp(self):
         """initializes new storage object for testing"""
         self.storage = FileStorage()
         self.bm_obj = BaseModel()
+
 
     def test_instantiation(self):
         """... checks proper FileStorage instantiation"""
@@ -95,13 +105,15 @@ class TestBmFsInstances(unittest.TestCase):
 
     def test_storage_file_exists(self):
         """... checks proper FileStorage instantiation"""
-        os.remove(F)
+        if os.path.isfile(F):
+            os.remove(F)
         self.bm_obj.save()
         self.assertTrue(os.path.isfile(F))
 
     def test_obj_saved_to_file(self):
         """... checks proper FileStorage instantiation"""
-        os.remove(F)
+        if os.path.isfile(F):
+            os.remove(F)
         self.bm_obj.save()
         bm_id = self.bm_obj.id
         actual = 0
@@ -124,7 +136,8 @@ class TestBmFsInstances(unittest.TestCase):
 
     def test_reload(self):
         """... checks proper usage of reload function"""
-        os.remove(F)
+        if os.path.isfile(F):
+            os.remove(F)
         self.bm_obj.save()
         bm_id = self.bm_obj.id
         actual = 0
@@ -138,7 +151,8 @@ class TestBmFsInstances(unittest.TestCase):
 
     def test_save_reload_class(self):
         """... checks proper usage of class attribute in file storage"""
-        os.remove(F)
+        if os.path.isfile(F):
+            os.remove(F)
         self.bm_obj.save()
         bm_id = self.bm_obj.id
         actual = 0
@@ -161,6 +175,15 @@ class TestUserFsInstances(unittest.TestCase):
         print('...... Testing FileStorage ......')
         print('.......... User  Class ..........')
         print('.................................\n\n')
+        if os.path.isfile(F):
+            cmd = "m=$(pwd);sudo mv $m/file.json $m/tmp.json && touch $m/file.json"
+            subprocess.run(cmd, shell = True, executable="/bin/bash")
+
+    @classmethod
+    def tearDownClass(cls):
+        if os.path.isfile(F):
+            cmd = "m=$(pwd);sudo rm $m/file.json;mv $m/tmp.json $m/file.json"
+            subprocess.run(cmd, shell = True, executable="/bin/bash")
 
     def setUp(self):
         """initializes new user for testing"""
@@ -170,14 +193,16 @@ class TestUserFsInstances(unittest.TestCase):
     @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
     def test_storage_file_exists(self):
         """... checks proper FileStorage instantiation"""
-        os.remove(F)
+        if os.path.isfile(F):
+            os.remove(F)
         self.user.save()
         self.assertTrue(os.path.isfile(F))
 
     @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
     def test_obj_saved_to_file(self):
         """... checks proper FileStorage instantiation"""
-        os.remove(F)
+        if os.path.isfile(F):
+            os.remove(F)
         self.user.save()
         u_id = self.user.id
         actual = 0
@@ -191,7 +216,8 @@ class TestUserFsInstances(unittest.TestCase):
     @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
     def test_reload(self):
         """... checks proper usage of reload function"""
-        os.remove(F)
+        if os.path.isfile(F):
+            os.remove(F)
         self.bm_obj.save()
         u_id = self.bm_obj.id
         actual = 0
@@ -317,3 +343,8 @@ class TestStorageCount(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main
+
+
+    #if os.path.isfile('./test.json'):
+    #    cmd = "rm $(pwd)/test.json"
+    #    subprocess.run(cmd, shell = True, executable="/bin/bash")
