@@ -343,8 +343,3 @@ class TestStorageCount(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main
-
-
-    #if os.path.isfile('./test.json'):
-    #    cmd = "rm $(pwd)/test.json"
-    #    subprocess.run(cmd, shell = True, executable="/bin/bash")
