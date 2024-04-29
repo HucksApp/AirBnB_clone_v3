@@ -14,9 +14,11 @@ User = models.user.User
 BaseModel = models.base_model.BaseModel
 FileStorage = engine.file_storage.FileStorage
 storage = models.storage
-F = './dev/file.json'
-storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 
+storage_type = os.environ.get('HBNB_TYPE_STORAGE')
+Fdev = './dev/file.json'
+Fsto = './file.json'
+F = Fdev if os.path.isfile(Fdev) else Fsto
 
 @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
 class TestFileStorageDocs(unittest.TestCase):
