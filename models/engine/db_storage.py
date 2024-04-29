@@ -55,7 +55,8 @@ class DBStorage:
     def count(self, cls=None):
         """
             query on the current database session
-            for counts of object of a class or all classes
+            for counts of objects of a class or all 
+            objects in store
         """
         count = 0
 
@@ -70,6 +71,7 @@ class DBStorage:
                 cls = cls if cls is classes[clss] else classes[clss]
                 count = self.__session.query(cls).count()
                 return count
+        return count
 
     def all(self, cls=None):
         """
