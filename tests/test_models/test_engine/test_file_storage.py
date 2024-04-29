@@ -93,15 +93,13 @@ class TestBmFsInstances(unittest.TestCase):
 
     def test_storage_file_exists(self):
         """... checks proper FileStorage instantiation"""
-        if os.path.isfile(F):
-            os.remove(F)
+        os.remove(F)
         self.bm_obj.save()
         self.assertTrue(os.path.isfile(F))
 
     def test_obj_saved_to_file(self):
         """... checks proper FileStorage instantiation"""
-        if os.path.isfile(F):
-            os.remove(F)
+        os.remove(F)
         self.bm_obj.save()
         bm_id = self.bm_obj.id
         actual = 0
@@ -124,8 +122,7 @@ class TestBmFsInstances(unittest.TestCase):
 
     def test_reload(self):
         """... checks proper usage of reload function"""
-        if os.path.isfile(F):
-            os.remove(F)
+        os.remove(F)
         self.bm_obj.save()
         bm_id = self.bm_obj.id
         actual = 0
@@ -139,8 +136,7 @@ class TestBmFsInstances(unittest.TestCase):
 
     def test_save_reload_class(self):
         """... checks proper usage of class attribute in file storage"""
-        if os.path.isfile(F):
-            os.remove(F)
+        os.remove(F)
         self.bm_obj.save()
         bm_id = self.bm_obj.id
         actual = 0
