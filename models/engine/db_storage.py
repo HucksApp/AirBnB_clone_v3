@@ -62,7 +62,6 @@ class DBStorage:
         if cls:
             objs = self.__session.query(classes.get(cls)).all()
             for obj in objs:
-                print(obj)
                 key = obj.__class__.__name__ + '.' + obj.id
                 new_dict[key] = obj
             return new_dict
