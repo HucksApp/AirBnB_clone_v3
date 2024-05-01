@@ -1,5 +1,5 @@
 def PRETIFY(title, name):
     print('\n\n.................................')
-    print(f'....... {title} .......')
-    print(f'.........  {name}  .........')
+    print('....... {} .......'.format(title))
+    print('.........  {}  .........'.format(title))
     print('.................................\n\n')
