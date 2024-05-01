@@ -35,14 +35,14 @@ class TestFileStorageDocs(unittest.TestCase):
 
     def test_doc_file(self):
         """... documentation for the file"""
-        expected = ("\nHandles I/O, writing and reading, of JSON for storage "
-                    "of all class instances\n")
-        actual = models.file_storage.__doc__
+        expected = ("\nFileStorage engine class\n")
+        actual = models.engine.file_storage.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_class(self):
         """... documentation for the class"""
-        expected = 'handles long term storage of all class instances'
+        expected = ("serializes and deserializes between object"
+                    " instances and json rep storage")
         actual = FileStorage.__doc__
         self.assertEqual(expected, actual)
 
@@ -54,9 +54,22 @@ class TestFileStorageDocs(unittest.TestCase):
 
     def test_doc_new(self):
         """... documentation for new function"""
-        expected = ("sets / updates in __objects the obj with key <obj class "
+        expected = ("sets in __objects the obj with key <obj class "
                     "name>.id")
         actual = FileStorage.new.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_get(self):
+        """... documentation for get function"""
+        expected = 'query for  one object'
+        actual = FileStorage.get.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_count(self):
+        """... documentation for get function"""
+        expected = ("query to count object of a class"
+                    " or all object in storage")
+        actual = FileStorage.count.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_save(self):
@@ -67,8 +80,8 @@ class TestFileStorageDocs(unittest.TestCase):
 
     def test_doc_reload(self):
         """... documentation for reload function"""
-        expected = ("if file exists, deserializes JSON file to __objects, "
-                    "else nothing")
+        expected = ("if file exists, deserializes JSON file"
+                    " to __objects")
         actual = FileStorage.reload.__doc__
         self.assertEqual(expected, actual)
 
@@ -84,13 +97,13 @@ class TestBmFsInstances(unittest.TestCase):
         print('..... For FileStorage Class .....')
         print('.................................\n\n')
         if os.path.isfile(F):
-            cmd = "m=$(pwd);sudo mv $m/file.json $m/tmp.json && touch $m/file.json"
+            cmd = "m=$(pwd);mv $m/file.json $m/tmp.json && touch $m/file.json"
             subprocess.run(cmd, shell = True, executable="/bin/bash")
 
     @classmethod
     def tearDownClass(cls):
         if os.path.isfile(F):
-            cmd = "m=$(pwd);sudo rm $m/file.json;mv $m/tmp.json $m/file.json"
+            cmd = "m=$(pwd);rm $m/file.json;mv $m/tmp.json $m/file.json"
             subprocess.run(cmd, shell = True, executable="/bin/bash")
 
     def setUp(self):
@@ -126,7 +139,7 @@ class TestBmFsInstances(unittest.TestCase):
 
     def test_to_json(self):
         """... to_json should return serializable dict object"""
-        my_model_json = self.bm_obj.to_json()
+        my_model_json = self.bm_obj.to_dict()
         actual = 1
         try:
             serialized = json.dumps(my_model_json)

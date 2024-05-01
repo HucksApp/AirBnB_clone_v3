@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" holds class User"""
+"""User Model Class"""
 import models
 from models.base_model import BaseModel, Base
 from os import getenv
@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
-    """Representation of a user """
+    """User class handles all application users"""
     if models.storage_t == 'db':
         __tablename__ = 'users'
         email = Column(String(128), nullable=False)

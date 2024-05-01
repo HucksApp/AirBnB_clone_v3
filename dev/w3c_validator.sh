@@ -25,8 +25,6 @@ Usage:  analyse_html <header> <url> <file_path>
     messages=json.load(sys.stdin).get('messages', []); \
     res=['[{}:{}] {}'.format('$1', m['lastLine'], m['message']) for m in messages]; \
     print(res)"
-    
-
 }
 
 

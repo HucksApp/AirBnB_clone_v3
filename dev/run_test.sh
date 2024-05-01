@@ -2,14 +2,15 @@
 :'
  This initializes testing suite.
  Checks pep8 style of all python files
- also runs all unittests
+ runs all unittests and validate static 
+ files (HTML, CSS)
  '
+
 pep8 . && python3 -m unittest discover -v ./tests/ \
         && ./dev/w3c_validator.py \
             $(find ./web_static -maxdepth 1 -name "*.html" -type f ! -name "4*") \
         && ./dev/w3c_validator.py \
 	        $(find ./web_static/styles -maxdepth 1 -name "*.css" -type f)
-
 # stores the return value
 ret=$?
 # clears file.json
