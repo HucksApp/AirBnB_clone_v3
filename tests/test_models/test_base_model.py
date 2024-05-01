@@ -7,20 +7,21 @@ from datetime import datetime
 import models
 import json
 import os
+from tests import PRETIFY
 
 BaseModel = models.base_model.BaseModel
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
-
+pretify_test = os.environ.get('PRETIFY')
 
 class TestBaseModelDocs(unittest.TestCase):
     """Class for testing BaseModel docs"""
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('..... Testing Documentation .....')
-        print('.....  For BaseModel Class  .....')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'For BaseModel Class'
+            PRETIFY(t, n)
 
     def test_doc_file(self):
         """... documentation for the file"""
@@ -58,10 +59,10 @@ class TestBaseModelInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('....... Testing Functions .......')
-        print('.....  For BaseModel Class  .....')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Attributes and Methods'
+            n = 'BaseModel Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new BaseModel instance for testing"""

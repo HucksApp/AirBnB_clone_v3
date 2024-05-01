@@ -10,14 +10,23 @@ from models import place
 from models.base_model import BaseModel
 import pep8
 import unittest
+import os
+from tests import PRETIFY
+
 Place = place.Place
+pretify_test = os.environ.get('PRETIFY')
 
 
 class TestPlaceDocs(unittest.TestCase):
     """Tests to check the documentation and style of Place class"""
+
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'Place  Class'
+            PRETIFY(t, n)
         cls.place_f = inspect.getmembers(Place, inspect.isfunction)
 
     def test_pep8_conformance_place(self):
@@ -59,6 +68,15 @@ class TestPlaceDocs(unittest.TestCase):
 
 class TestPlace(unittest.TestCase):
     """Test the Place class"""
+
+    @classmethod
+    def setUpClass(cls):
+        """Set up for the doc tests"""
+        if pretify_test:
+            t = 'Testing Attributes and Methods'
+            n = 'Place  Class'
+            PRETIFY(t, n)
+
     def test_is_subclass(self):
         """Test that Place is a subclass of BaseModel"""
         place = Place()

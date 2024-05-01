@@ -10,7 +10,11 @@ from models import state
 from models.base_model import BaseModel
 import pep8
 import unittest
+import os
+from tests import PRETIFY
+
 State = state.State
+pretify_test = os.environ.get('PRETIFY')
 
 
 class TestStateDocs(unittest.TestCase):
@@ -18,6 +22,10 @@ class TestStateDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'State Class'
+            PRETIFY(t, n)
         cls.state_f = inspect.getmembers(State, inspect.isfunction)
 
     def test_pep8_conformance_state(self):
@@ -59,6 +67,15 @@ class TestStateDocs(unittest.TestCase):
 
 class TestState(unittest.TestCase):
     """Test the State class"""
+
+    @classmethod
+    def setUpClass(cls):
+        """Set up for the doc tests"""
+        if pretify_test:
+            t = 'Testing Atrributes and Methods'
+            n = 'State Class'
+            PRETIFY(t, n)
+
     def test_is_subclass(self):
         """Test that State is a subclass of BaseModel"""
         state = State()

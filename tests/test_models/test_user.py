@@ -7,21 +7,23 @@ from datetime import datetime
 import models
 import json
 import os
+from tests import PRETIFY
+
 
 User = models.user.User
 BaseModel = models.base_model.BaseModel
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
-
+pretify_test = os.environ.get('PRETIFY')
 
 class TestUserDocs(unittest.TestCase):
     """Class for testing User Class docs"""
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('..... Testing Documentation .....')
-        print('........   User  Class   ........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'State Class'
+            PRETIFY(t, n)
 
     def test_doc_file(self):
         """... documentation for the file"""
@@ -39,12 +41,13 @@ class TestUserDocs(unittest.TestCase):
 class TestUserInstances(unittest.TestCase):
     """testing for class instances"""
 
+   
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('....... Testing Functions .......')
-        print('.........  User  Class  .........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Atrributes and Methods'
+            n = 'User Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new user for testing"""

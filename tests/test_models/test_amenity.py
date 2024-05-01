@@ -7,21 +7,22 @@ from datetime import datetime
 import models
 import json
 import os
+from tests import PRETIFY
 
 Amenity = models.amenity.Amenity
 BaseModel = models.base_model.BaseModel
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
-
+pretify_test = os.environ.get('PRETIFY')
 
 class TestAmenityDocs(unittest.TestCase):
     """Class for testing BaseModel docs"""
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('..... Testing Documentation .....')
-        print('........   Amenity  Class   ........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'Amenity  Class'
+            PRETIFY(t, n)
 
     def test_doc_file(self):
         """... documentation for the file"""
@@ -41,10 +42,10 @@ class TestAmenityInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('....... Testing Functions .......')
-        print('.........  Amenity  Class  .........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Attributes and Methods'
+            n = 'Amenity  Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new amenity for testing"""

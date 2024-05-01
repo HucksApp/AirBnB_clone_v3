@@ -7,21 +7,23 @@ from datetime import datetime
 import models
 import json
 import os
+from tests import PRETIFY
+
 
 City = models.city.City
 BaseModel = models.base_model.BaseModel
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
-
+pretify_test = os.environ.get('PRETIFY')
 
 class TestCityDocs(unittest.TestCase):
     """Class for testing BaseModel docs"""
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('..... Testing Documentation .....')
-        print('........   City Class   ........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'City Class'
+            PRETIFY(t, n)
 
     def test_doc_file(self):
         """... documentation for the file"""
@@ -38,13 +40,12 @@ class TestCityDocs(unittest.TestCase):
 
 class TestCityInstances(unittest.TestCase):
     """testing for class instances"""
-
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('....... Testing Functions .......')
-        print('.........  City Class  .........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Attributes and Methods'
+            n = 'City Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new city for testing"""

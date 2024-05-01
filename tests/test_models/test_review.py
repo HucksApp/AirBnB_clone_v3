@@ -9,15 +9,24 @@ import models
 from models import review
 from models.base_model import BaseModel
 import pep8
+import os
+from tests import PRETIFY
 import unittest
+
+pretify_test = os.environ.get('PRETIFY')
 Review = review.Review
 
 
 class TestReviewDocs(unittest.TestCase):
     """Tests to check the documentation and style of Review class"""
+
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'Review Class'
+            PRETIFY(t, n)
         cls.review_f = inspect.getmembers(Review, inspect.isfunction)
 
     def test_pep8_conformance_review(self):
@@ -59,6 +68,15 @@ class TestReviewDocs(unittest.TestCase):
 
 class TestReview(unittest.TestCase):
     """Test the Review class"""
+
+    @classmethod
+    def setUpClass(cls):
+        """Set up for the doc tests"""
+        if pretify_test:
+            t = 'Testing Attributes and Methods'
+            n = 'Review Class'
+            PRETIFY(t, n)
+
     def test_is_subclass(self):
         """Test if Review is a subclass of BaseModel"""
         review = Review()

@@ -10,6 +10,7 @@ from models.engine.file_storage import FileStorage
 import json
 import os
 import subprocess
+from tests import PRETIFY
 
 User = models.user.User
 BaseModel = models.base_model.BaseModel
@@ -18,8 +19,7 @@ storage = models.storage
 
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 F = './file.json'
-
-
+pretify_test = os.environ.get('PRETIFY')
 
 
 @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
@@ -28,10 +28,10 @@ class TestFileStorageDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('..... Testing Documentation .....')
-        print('..... For FileStorage Class .....')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'For FileStorage Class'
+            PRETIFY(t, n)
 
     def test_doc_file(self):
         """... documentation for the file"""
@@ -89,13 +89,14 @@ class TestFileStorageDocs(unittest.TestCase):
 @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
 class TestBmFsInstances(unittest.TestCase):
     """testing for class instances"""
+    
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('...... Testing FileStorate ......')
-        print('..... For FileStorage Class .....')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing FileStorate'
+            n = 'For FileStorage Class'
+            PRETIFY(t, n)
         if os.path.isfile(F):
             cmd = "m=$(pwd);mv $m/file.json $m/tmp.json && touch $m/file.json"
             subprocess.call(cmd, shell = True, executable="/bin/bash")
@@ -184,10 +185,10 @@ class TestUserFsInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('...... Testing FileStorage ......')
-        print('.......... User  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing FileStorate'
+            n = 'User Class'
+            PRETIFY(t, n)
         if os.path.isfile(F):
             cmd = "m=$(pwd);mv $m/file.json $m/tmp.json && touch $m/file.json"
             subprocess.call(cmd, shell = True, executable="/bin/bash")
@@ -254,10 +255,10 @@ class TestStorageGet(unittest.TestCase):
         """
         setup tests for class
         """
-        print('\n\n.................................')
-        print('...... Testing Get() Method ......')
-        print('.......... Place  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Get() Method'
+            n = 'Place  Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """
@@ -272,9 +273,7 @@ class TestStorageGet(unittest.TestCase):
         :return: True if pass, False if not pass
         """
 
-        print(self.state.id)
         result = storage.get(cls="State", id=self.state.id)
-
         self.assertIsInstance(result, models.state.State)
 
     def test_get_method_return(self):
@@ -283,7 +282,6 @@ class TestStorageGet(unittest.TestCase):
         :return: True if pass, false if not pass
         """
         result = storage.get(cls="State", id=str(self.state.id))
-
         self.assertEqual(self.state.id, result.id)
 
     def test_get_method_none(self):
@@ -307,10 +305,10 @@ class TestStorageCount(unittest.TestCase):
         """
         setup tests for class
         """
-        print('\n\n.................................')
-        print('...... Testing Get() Method ......')
-        print('.......... Place  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Count() Method'
+            n = 'Place Class'
+            PRETIFY(t, n)
 
     def setup(self):
         """
