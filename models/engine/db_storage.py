@@ -29,7 +29,7 @@ class DBStorage:
                                              HBNB_MYSQL_PWD,
                                              HBNB_MYSQL_HOST,
                                              HBNB_MYSQL_DB))
-        if os.environ.get("HBNB_ENV") == 'test':
+        if HBNB_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def get(self, cls, id):
@@ -37,8 +37,8 @@ class DBStorage:
             query on the current database session
             for one object with given <id>
         """
-        all_class = self.all(cls)
-        for obj in all_class.values():
+        all_obj = self.all(cls)
+        for obj in all_obj.values():
             if id == str(obj.id):
                 return obj
         return None

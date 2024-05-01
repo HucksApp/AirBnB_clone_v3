@@ -22,26 +22,15 @@ class FileStorage:
 
     def get(self, cls, id):
         """query for  one object"""
-        if cls:
-            cls = (classes[cls] if type(cls) is str and cls in classes
-                   else cls if type(cls) in list(classes.values())
-                   else None)
-            if cls:
-                for val in self.all(cls).values():
-                    if cls == val.__class__ or cls == val.__class__.__name__:
-                        if str(val.id) == id:
-                            return val
+        for val in self.all(cls).values():
+            if cls == val.__class__ or cls == val.__class__.__name__:
+                if str(val.id) == id:
+                    return val
         return None
 
     def count(self, cls=None):
         """query to count object of a class or all object in storage"""
-        count = 0
-        if cls and str(cls) in classes.keys():
-            for value in (self.all()).values():
-                if cls == value.__class__ or cls == value.__class__.__name__:
-                    count += 1
-            return count
-        return len(self.__objects)
+        return len(self.all(cls))
 
     def all(self, cls=None):
         """returns private attribute: __objects"""

@@ -3,6 +3,7 @@
 """
 from models import storage
 from models.state import State
+from models.user import User
 
 print("All objects: {}".format(storage.count()))
 print("State objects: {}".format(storage.count(State)))
