@@ -37,14 +37,10 @@ class DBStorage:
             query on the current database session
             for one object with given <id>
         """
-        cls = (classes[cls] if type(cls) is str and cls in classes
-               else cls if type(cls) in list(classes.values())
-               else None)
-        if cls:
-            all_class = self.all(cls)
-            for obj in all_class.values():
-                if id == str(obj.id):
-                    return obj
+        all_class = self.all(cls)
+        for obj in all_class.values():
+            if id == str(obj.id):
+                return obj
         return None
 
     def count(self, cls=None):
