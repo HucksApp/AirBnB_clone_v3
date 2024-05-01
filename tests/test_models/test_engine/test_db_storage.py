@@ -4,6 +4,7 @@ Unit Test for BaseModel Class
 """
 import unittest
 from datetime import datetime
+import models.engine.db_storage as db_storage
 from models import *
 import os
 from models.base_model import Base
