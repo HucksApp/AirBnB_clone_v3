@@ -98,13 +98,13 @@ class TestBmFsInstances(unittest.TestCase):
         print('.................................\n\n')
         if os.path.isfile(F):
             cmd = "m=$(pwd);mv $m/file.json $m/tmp.json && touch $m/file.json"
-            subprocess.run(cmd, shell = True, executable="/bin/bash")
+            subprocess.call(cmd, shell = True, executable="/bin/bash")
 
     @classmethod
     def tearDownClass(cls):
         if os.path.isfile(F):
             cmd = "m=$(pwd);rm $m/file.json;mv $m/tmp.json $m/file.json"
-            subprocess.run(cmd, shell = True, executable="/bin/bash")
+            subprocess.call(cmd, shell = True, executable="/bin/bash")
 
     def setUp(self):
         """initializes new storage object for testing"""
@@ -189,14 +189,14 @@ class TestUserFsInstances(unittest.TestCase):
         print('.......... User  Class ..........')
         print('.................................\n\n')
         if os.path.isfile(F):
-            cmd = "m=$(pwd);sudo mv $m/file.json $m/tmp.json && touch $m/file.json"
-            subprocess.run(cmd, shell = True, executable="/bin/bash")
+            cmd = "m=$(pwd);mv $m/file.json $m/tmp.json && touch $m/file.json"
+            subprocess.call(cmd, shell = True, executable="/bin/bash")
 
     @classmethod
     def tearDownClass(cls):
         if os.path.isfile(F):
-            cmd = "m=$(pwd);sudo rm $m/file.json;mv $m/tmp.json $m/file.json"
-            subprocess.run(cmd, shell = True, executable="/bin/bash")
+            cmd = "m=$(pwd);rm $m/file.json;mv $m/tmp.json $m/file.json"
+            subprocess.call(cmd, shell = True, executable="/bin/bash")
 
     def setUp(self):
         """initializes new user for testing"""
