@@ -5,13 +5,18 @@ Unit Test for BaseModel Class
 import unittest
 from datetime import datetime
 import models.engine.db_storage as db_storage
-from models import *
+from models import storage
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
 import os
 from models.base_model import Base
 from models.engine.db_storage import DBStorage
-
+from tests import PRETIFY
 
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
+pretify_test = os.environ.get('PRETIFY')
 
 
 @unittest.skipIf(storage_type != 'db', 'skip if environ is not db')
@@ -20,50 +25,51 @@ class TestDBStorageDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('..... Testing Documentation .....')
-        print('..... For FileStorage Class .....')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing Documentation'
+            n = 'For DBStorage Class'
+            PRETIFY(t, n)
 
     def test_doc_file(self):
         """... documentation for the file"""
-        expected = ' Database engine '
+        expected = 'DBStorage engine class'
         actual = db_storage.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_class(self):
         """... documentation for the class"""
-        expected = 'handles long term storage of all class instances'
+        expected = ("handles storage of all class "
+                    "instances with the MySQL database")
         actual = DBStorage.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_all(self):
         """... documentation for all function"""
-        expected = ' returns a dictionary of all objects '
+        expected = 'returns a dictionary of all objects'
         actual = DBStorage.all.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_new(self):
         """... documentation for new function"""
-        expected = ' adds objects to current database session '
+        expected = 'adds objects to current database session'
         actual = DBStorage.new.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_save(self):
         """... documentation for save function"""
-        expected = ' commits all changes of current database session '
+        expected = 'commits all changes of current database session'
         actual = DBStorage.save.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_reload(self):
         """... documentation for reload function"""
-        expected = ' creates all tables in database & session from engine '
+        expected = 'reloads all instance from the database'
         actual = DBStorage.reload.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_delete(self):
         """... documentation for delete function"""
-        expected = ' deletes obj from current database session if not None '
+        expected = 'deletes obj from current database session if not None'
         actual = DBStorage.delete.__doc__
         self.assertEqual(expected, actual)
 
@@ -74,10 +80,10 @@ class TestStateDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('......... Testing DBStorage .;.......')
-        print('........ For State Class ........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing DBStorage'
+            n = 'State Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new BaseModel object for testing"""
@@ -120,10 +126,10 @@ class TestUserDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('...... Testing FileStorage ......')
-        print('.......... User  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing DBStorage'
+            n = 'User Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new user for testing"""
@@ -167,10 +173,10 @@ class TestCityDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('...... Testing DBStorage ......')
-        print('.......... City  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing DBStorage'
+            n = 'City Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new user for testing"""
@@ -206,10 +212,10 @@ class TestCityDBInstancesUnderscore(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('...... Testing FileStorage ......')
-        print('.......... City Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing DBStorage'
+            n = 'City Class Strings with non print char'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new user for testing"""
@@ -245,10 +251,10 @@ class TestPlaceDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print('\n\n.................................')
-        print('...... Testing DBStorage ......')
-        print('.......... Place  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing DBStorage'
+            n = 'Place Class'
+            PRETIFY(t, n)
 
     def setUp(self):
         """initializes new user for testing"""
@@ -305,10 +311,10 @@ class TestStorageGet(unittest.TestCase):
         """
         setup tests for class
         """
-        print('\n\n.................................')
-        print('...... Testing Get() Method ......')
-        print('.......... Place  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing DBStorage'
+            n = 'Place Class: Testing Get() Method'
+            PRETIFY(t, n)
 
     def setUp(self):
         """
@@ -332,7 +338,6 @@ class TestStorageGet(unittest.TestCase):
         :return: True if pass, false if not pass
         """
         result = storage.get(cls="State", id=str(self.state.id))
-
         self.assertEqual(self.state.id, result.id)
 
     def test_get_method_none(self):
@@ -340,8 +345,8 @@ class TestStorageGet(unittest.TestCase):
         testing get() method for None return
         :return: True if pass, false if not pass
         """
-        result = storage.get(cls="State", id="doesnotexist")
 
+        result = storage.get(cls="State", id="doesnotexist")
         self.assertIsNone(result)
 
 
@@ -356,10 +361,10 @@ class TestStorageCount(unittest.TestCase):
         """
         setup tests for class
         """
-        print('\n\n.................................')
-        print('...... Testing Get() Method ......')
-        print('.......... Place  Class ..........')
-        print('.................................\n\n')
+        if pretify_test:
+            t = 'Testing DBStorage'
+            n = 'Place Class: Testing Count() Method'
+            PRETIFY(t, n)
 
     def setup(self):
         """

@@ -3,6 +3,7 @@
 import models
 from models.base_model import BaseModel, Base
 from os import getenv
+from hashlib import md5
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
@@ -16,8 +17,8 @@ class User(BaseModel, Base):
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
-        places = relationship("Place", backref="user")
-        reviews = relationship("Review", backref="user")
+        places = relationship("Place", backref="user", cascade='delete')
+        reviews = relationship("Review", backref="user", cascade='delete')
     else:
         email = ""
         password = ""
@@ -27,3 +28,20 @@ class User(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """initializes user"""
         super().__init__(*args, **kwargs)
+
+    @property
+    def password(self):
+        """
+        getter for password
+        :return: password (hashed)
+        """
+        return self.__dict__.get("password")
+
+    @password.setter
+    def password(self, password):
+        """
+        Password setter, with md5 hasing
+        :param password: password
+        :return: nothing
+        """
+        self.__dict__["password"] = md5(password.encode('utf-8')).hexdigest()

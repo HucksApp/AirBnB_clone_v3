@@ -19,6 +19,18 @@ class City(BaseModel, Base):
         state_id = ""
         name = ""
 
-    def __init__(self, *args, **kwargs):
-        """initializes city"""
-        super().__init__(*args, **kwargs)
+    if models.storage_t != 'db':
+        @property
+        def places(self):
+            """
+            getter for places
+            :return: list of places in that city
+            """
+            all_places = models.storage.all("Place")
+
+            result = []
+
+            for obj in all_places.values():
+                if str(obj.city_id) == str(self.id):
+                    result.append(obj)
+            return result

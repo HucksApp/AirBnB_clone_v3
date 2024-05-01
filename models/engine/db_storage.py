@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Contains the class DBStorage
-"""
+"""DBStorage engine class"""
 
 import models
 from models.amenity import Amenity
@@ -15,7 +13,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 class DBStorage:
-    """interaacts with the MySQL database"""
+    """handles storage of all class instances with the MySQL database"""
     __engine = None
     __session = None
 
@@ -42,8 +40,11 @@ class DBStorage:
         for clss in classes:
             if cls is classes[clss] or cls is clss:
                 cls = cls if cls is classes[clss] else classes[clss]
-                objs = self.__session.query(cls).filter(cls.id == id)     
-                return objs
+                all_class = self.all(cls)
+
+                for obj in all_class.values():
+                    if id == str(obj.id):
+                        return obj     
         return None
 
     def count(self, cls=None):
@@ -52,26 +53,10 @@ class DBStorage:
             for counts of objects of a class or all 
             objects in store
         """
-        count = 0
-
-        if cls is None:
-            for clss in classes:
-                cls = classes[clss]
-                count += self.__session.query(cls).count()
-            return count
-
-        for clss in classes:
-            if cls is classes[clss] or cls is clss:
-                cls = cls if cls is classes[clss] else classes[clss]
-                count = self.__session.query(cls).count()
-                return count
-        return count
+        return len(self.all(cls))
 
     def all(self, cls=None):
-        """
-            query on the current database session
-            for all objects of a class
-        """
+        """returns a dictionary of all objects"""
         new_dict = {}
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
@@ -82,20 +67,20 @@ class DBStorage:
         return (new_dict)
 
     def new(self, obj):
-        """add the object to the current database session"""
+        """adds objects to current database session"""
         self.__session.add(obj)
 
     def save(self):
-        """commit all changes of the current database session"""
+        """commits all changes of current database session"""
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete from the current database session obj if not None"""
+        """deletes obj from current database session if not None"""
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
-        """reloads data from the database"""
+        """reloads all instance from the database"""
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)

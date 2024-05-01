@@ -15,6 +15,7 @@ BaseModel = models.base_model.BaseModel
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 pretify_test = os.environ.get('PRETIFY')
 
+
 class TestCityDocs(unittest.TestCase):
     """Class for testing BaseModel docs"""
 

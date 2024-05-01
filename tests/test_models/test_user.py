@@ -15,6 +15,7 @@ BaseModel = models.base_model.BaseModel
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 pretify_test = os.environ.get('PRETIFY')
 
+
 class TestUserDocs(unittest.TestCase):
     """Class for testing User Class docs"""
 
@@ -41,7 +42,6 @@ class TestUserDocs(unittest.TestCase):
 class TestUserInstances(unittest.TestCase):
     """testing for class instances"""
 
-   
     @classmethod
     def setUpClass(cls):
         if pretify_test:

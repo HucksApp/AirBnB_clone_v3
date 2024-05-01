@@ -15,8 +15,7 @@ if models.storage_t == 'db':
                                  primary_key=True),
                           Column('amenity_id', String(60),
                                  ForeignKey('amenities.id', onupdate='CASCADE',
-                                            ondelete='CASCADE'),
-                                 primary_key=True))
+                                            ondelete='CASCADE')))
 
 
 class Place(BaseModel, Base):
@@ -33,10 +32,9 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
-        reviews = relationship("Review", backref="place")
+        reviews = relationship("Review", backref="place", cascade='delete')
         amenities = relationship("Amenity", secondary="place_amenity",
-                                 backref="place_amenities",
-                                 viewonly=False)
+                                 backref="place_amenities", viewonly=False)
     else:
         city_id = ""
         user_id = ""
@@ -76,3 +74,11 @@ class Place(BaseModel, Base):
                 if amenity.place_id == self.id:
                     amenity_list.append(amenity)
             return amenity_list
+
+        @amenities.setter
+        def amenities(self, amenity):
+            """
+            ammenities setter
+            :return:
+            """
+            self.amenity_ids.append(amenity.id)

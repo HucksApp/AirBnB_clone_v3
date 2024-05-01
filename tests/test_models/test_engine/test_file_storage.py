@@ -89,7 +89,6 @@ class TestFileStorageDocs(unittest.TestCase):
 @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
 class TestBmFsInstances(unittest.TestCase):
     """testing for class instances"""
-    
 
     @classmethod
     def setUpClass(cls):
@@ -99,19 +98,18 @@ class TestBmFsInstances(unittest.TestCase):
             PRETIFY(t, n)
         if os.path.isfile(F):
             cmd = "m=$(pwd);mv $m/file.json $m/tmp.json && touch $m/file.json"
-            subprocess.call(cmd, shell = True, executable="/bin/bash")
+            subprocess.call(cmd, shell=True, executable="/bin/bash")
 
     @classmethod
     def tearDownClass(cls):
         if os.path.isfile(F):
             cmd = "m=$(pwd);rm $m/file.json;mv $m/tmp.json $m/file.json"
-            subprocess.call(cmd, shell = True, executable="/bin/bash")
+            subprocess.call(cmd, shell=True, executable="/bin/bash")
 
     def setUp(self):
         """initializes new storage object for testing"""
         self.storage = FileStorage()
         self.bm_obj = BaseModel()
-
 
     def test_instantiation(self):
         """... checks proper FileStorage instantiation"""
@@ -191,13 +189,13 @@ class TestUserFsInstances(unittest.TestCase):
             PRETIFY(t, n)
         if os.path.isfile(F):
             cmd = "m=$(pwd);mv $m/file.json $m/tmp.json && touch $m/file.json"
-            subprocess.call(cmd, shell = True, executable="/bin/bash")
+            subprocess.call(cmd, shell=True, executable="/bin/bash")
 
     @classmethod
     def tearDownClass(cls):
         if os.path.isfile(F):
             cmd = "m=$(pwd);rm $m/file.json;mv $m/tmp.json $m/file.json"
-            subprocess.call(cmd, shell = True, executable="/bin/bash")
+            subprocess.call(cmd, shell=True, executable="/bin/bash")
 
     def setUp(self):
         """initializes new user for testing"""
