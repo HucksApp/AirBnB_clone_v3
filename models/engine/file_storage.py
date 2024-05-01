@@ -6,10 +6,14 @@ FileStorage engine class
 import json
 from models.base_model import BaseModel
 from models.engine import serializable as classes
+from datetime import datetime
 
 
 class FileStorage:
-    """serializes and deserializes between object instances and json rep storage"""
+    """
+    serializes and deserializes between object
+    instances and json rep storage
+    """
 
     # string - path to the JSON file
     __file_path = "file.json"
@@ -18,18 +22,22 @@ class FileStorage:
 
     def get(self, cls, id):
         """query for  one object"""
-        if cls and (classes[cls] or cls in list(classes.keys())):
-            for value in self.__objects.values():
-                if cls == value.__class__ or cls == value.__class__.__name__:
-                    if value.id == id:
-                        return value
+        if cls:
+            cls = (classes[cls] if type(cls) is str and cls in classes
+                   else cls if type(cls) in list(classes.values())
+                   else None)
+            if cls:
+                for val in self.all(cls).values():
+                    if cls == val.__class__ or cls == val.__class__.__name__:
+                        if str(val.id) == id:
+                            return val
         return None
 
     def count(self, cls=None):
         """query to count object of a class or all object in storage"""
         count = 0
-        if cls and (classes[cls] or cls in list(classes.keys())):
-            for value in self.__objects.values():
+        if cls and str(cls) in classes.keys():
+            for value in (self.all()).values():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     count += 1
             return count
@@ -39,8 +47,9 @@ class FileStorage:
         """returns private attribute: __objects"""
         if cls is not None:
             new_dict = {}
-            for key, value in self.__objects.items():
-                if cls == value.__class__ or cls == value.__class__.__name__:
+            self.reload()
+            for key, value in FileStorage.__objects.items():
+                if cls is value.__class__ or cls == value.__class__.__name__:
                     new_dict[key] = value
             return new_dict
         return self.__objects
@@ -61,13 +70,21 @@ class FileStorage:
 
     def reload(self):
         """if file exists, deserializes JSON file to __objects"""
+        fname = FileStorage.__file_path
+        FileStorage.__objects = {}
         try:
-            with open(self.__file_path, 'r') as f:
-                jo = json.load(f)
-            for key in jo:
-                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
+            with open(fname, mode='r', encoding='utf-8') as f_io:
+                new_objs = json.load(f_io)
         except:
-            pass
+            return
+        for o_id, d in new_objs.items():
+            k_cls = d['__class__']
+            d.pop("__class__", None)
+            d["created_at"] = datetime.strptime(d["created_at"],
+                                                "%Y-%m-%d %H:%M:%S.%f")
+            d["updated_at"] = datetime.strptime(d["updated_at"],
+                                                "%Y-%m-%d %H:%M:%S.%f")
+            FileStorage.__objects[o_id] = classes[k_cls](**d)
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""

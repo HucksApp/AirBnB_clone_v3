@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/Users/jasonhucks/.venv/bin/python
 """ Test .get() and .count() methods
 """
 from models import storage
