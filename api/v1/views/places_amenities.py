@@ -25,7 +25,7 @@ def amenity_by_place(place_id):
         abort(404)
 
     for obj in fetched_obj.amenities:
-        all_amenities.append(obj.to_json())
+        all_amenities.append(obj.to_dict())
 
     return jsonify(all_amenities)
 
@@ -90,7 +90,7 @@ def link_amenity_to_place(place_id, amenity_id):
             break
 
     if found_amenity is not None:
-        return jsonify(found_amenity.to_json())
+        return jsonify(found_amenity.to_dict())
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
         fetched_obj.amenities.append(amenity_obj)
@@ -99,7 +99,7 @@ def link_amenity_to_place(place_id, amenity_id):
 
     fetched_obj.save()
 
-    resp = jsonify(amenity_obj.to_json())
+    resp = jsonify(amenity_obj.to_dict())
     resp.status_code = 201
 
     return resp
