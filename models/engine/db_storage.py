@@ -57,18 +57,23 @@ class DBStorage:
 
         if cls:
             objs = self.__session.query(classes.get(cls)).all()
-            for obj in objs:
-                key = obj.__class__.__name__ + '.' + obj.id
-                new_dict[key] = obj
+            print(cls)
+            if len(objs) > 0:
+                print(objs, "++++++")
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    new_dict[key] = obj
             return new_dict
 
         for clss in classes:
             if clss == 'BaseModel':
                 continue
             objs = self.__session.query(classes.get(clss)).all()
-            for obj in objs:
-                key = obj.__class__.__name__ + '.' + obj.id
-                new_dict[key] = obj
+            if len(objs) > 0:
+                print(objs, "=======")
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    new_dict[key] = obj
         return (new_dict)
 
     def new(self, obj):
