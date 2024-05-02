@@ -55,11 +55,9 @@ class DBStorage:
         """returns a dictionary of all objects"""
         new_dict = {}
 
-        if cls:
-            objs = self.__session.query(classes.get(cls)).all()
-            print(cls)
+        if cls and cls in list(classes.values()):
+            objs = self.__session.query(cls).all()
             if len(objs) > 0:
-                print(objs, "++++++")
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
@@ -70,7 +68,6 @@ class DBStorage:
                 continue
             objs = self.__session.query(classes.get(clss)).all()
             if len(objs) > 0:
-                print(objs, "=======")
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
