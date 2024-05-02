@@ -23,7 +23,7 @@ class TestPlaceDocs(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Documentation'
             n = 'Place  Class'
             PRETIFY(t, n)
@@ -72,7 +72,7 @@ class TestPlace(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Attributes and Methods'
             n = 'Place  Class'
             PRETIFY(t, n)

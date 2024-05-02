@@ -21,7 +21,7 @@ class TestUserDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Documentation'
             n = 'State Class'
             PRETIFY(t, n)
@@ -44,7 +44,7 @@ class TestUserInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Atrributes and Methods'
             n = 'User Class'
             PRETIFY(t, n)

@@ -25,7 +25,7 @@ class TestDBStorageDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Documentation'
             n = 'For DBStorage Class'
             PRETIFY(t, n)
@@ -80,7 +80,7 @@ class TestStateDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing DBStorage'
             n = 'State Class'
             PRETIFY(t, n)
@@ -126,7 +126,7 @@ class TestUserDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing DBStorage'
             n = 'User Class'
             PRETIFY(t, n)
@@ -173,7 +173,7 @@ class TestCityDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing DBStorage'
             n = 'City Class'
             PRETIFY(t, n)
@@ -212,7 +212,7 @@ class TestCityDBInstancesUnderscore(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing DBStorage'
             n = 'City Class Strings with non print char'
             PRETIFY(t, n)
@@ -251,7 +251,7 @@ class TestPlaceDBInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing DBStorage'
             n = 'Place Class'
             PRETIFY(t, n)
@@ -311,7 +311,7 @@ class TestStorageGet(unittest.TestCase):
         """
         setup tests for class
         """
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing DBStorage'
             n = 'Place Class: Testing Get() Method'
             PRETIFY(t, n)
@@ -361,7 +361,7 @@ class TestStorageCount(unittest.TestCase):
         """
         setup tests for class
         """
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing DBStorage'
             n = 'Place Class: Testing Count() Method'
             PRETIFY(t, n)

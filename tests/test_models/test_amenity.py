@@ -20,7 +20,7 @@ class TestAmenityDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Documentation'
             n = 'Amenity  Class'
             PRETIFY(t, n)
@@ -43,7 +43,7 @@ class TestAmenityInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Attributes and Methods'
             n = 'Amenity  Class'
             PRETIFY(t, n)

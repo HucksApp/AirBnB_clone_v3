@@ -19,7 +19,7 @@ class TestBaseModelDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Documentation'
             n = 'For BaseModel Class'
             PRETIFY(t, n)
@@ -60,7 +60,7 @@ class TestBaseModelInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Attributes and Methods'
             n = 'BaseModel Class'
             PRETIFY(t, n)

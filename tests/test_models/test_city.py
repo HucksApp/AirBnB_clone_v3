@@ -21,7 +21,7 @@ class TestCityDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Documentation'
             n = 'City Class'
             PRETIFY(t, n)
@@ -43,7 +43,7 @@ class TestCityInstances(unittest.TestCase):
     """testing for class instances"""
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Attributes and Methods'
             n = 'City Class'
             PRETIFY(t, n)

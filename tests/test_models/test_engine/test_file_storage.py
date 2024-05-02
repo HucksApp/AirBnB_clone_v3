@@ -28,8 +28,8 @@ class TestFileStorageDocs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
-            t = 'Testing Documentation'
+        if pretify_test == 'True':
+            t = 'Testing ------- Documentation'
             n = 'For FileStorage Class'
             PRETIFY(t, n)
 
@@ -92,7 +92,7 @@ class TestBmFsInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing FileStorate'
             n = 'For FileStorage Class'
             PRETIFY(t, n)
@@ -183,7 +183,7 @@ class TestUserFsInstances(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing FileStorate'
             n = 'User Class'
             PRETIFY(t, n)
@@ -253,7 +253,7 @@ class TestStorageGet(unittest.TestCase):
         """
         setup tests for class
         """
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Get() Method'
             n = 'Place  Class'
             PRETIFY(t, n)
@@ -303,7 +303,7 @@ class TestStorageCount(unittest.TestCase):
         """
         setup tests for class
         """
-        if pretify_test:
+        if pretify_test == 'True':
             t = 'Testing Count() Method'
             n = 'Place Class'
             PRETIFY(t, n)
