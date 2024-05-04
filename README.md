@@ -155,12 +155,12 @@ EOF  all  create  destroy  help  quit  show  update
 (hbnb) quit
 ```
 
-## Bugs
+## Bugs 🐛 🪲
 No known bugs at this time. 
 
-## Authors
+## Authors 🖌
 Aremu Mohammad Abiodun - [Github](https://github.com/Hucksapp) / [Twitter](https://twitter.com/hucks_jake)  
 
 Second part of Airbnb: Joann Vuong
-## License
+## License ©
 Public Domain. No copy write protection. 
