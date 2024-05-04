@@ -66,7 +66,8 @@ Child Classes of Base Model 🆑:
 #### `/tests` directory contains all unit test cases for this project 🧪 🌡:
 * To run All tests `python3 -m unittest discover tests`
 * To run specific tests `python3 -m unittest  tests/<path to test file>`
- * Pass Enviroment variable `PRETIFY=True`  to view test in graphical mode
+* Pass Enviroment variable `PRETIFY=True`  to view test in graphical mode
+
 [/test_models/test_base_model.py](/tests/test_models/test_base_model.py) - Contains the TestBaseModel and TestBaseModelDocs classes
 TestBaseModelDocs class:
 * `def setUpClass(cls)`- Set up for the doc tests
