@@ -108,12 +108,12 @@ class TestAmenityInstances(unittest.TestCase):
 
     def test_amenity_attribute(self):
         """... add amenity attribute"""
-        self.amenity.name = "greatWifi"
+        self.amenity.name = "testatt"
         if hasattr(self.amenity, 'name'):
             actual = self.amenity.name
         else:
             actual = ''
-        expected = "greatWifi"
+        expected = "testatt"
         self.assertEqual(expected, actual)
 
 if __name__ == '__main__':
