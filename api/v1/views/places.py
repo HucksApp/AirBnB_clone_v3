@@ -48,7 +48,7 @@ def place_create(city_id):
     new_place = Place(**place_json)
     new_place.save()
     resp = jsonify(new_place.to_dict())
-    resp.status_code = 201
+    resp.status_code = 200
 
     return resp
 
