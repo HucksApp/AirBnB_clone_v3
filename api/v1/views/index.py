@@ -32,6 +32,7 @@ def stats():
     :return: json of all objs
     """
     data = {
+        
         "amenities": storage.count("Amenity"),
         "cities": storage.count("City"),
         "places": storage.count("Place"),

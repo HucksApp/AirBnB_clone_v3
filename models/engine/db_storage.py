@@ -39,6 +39,7 @@ class DBStorage:
         """
         all_obj = self.all(cls)
         for obj in all_obj.values():
+            print(id , obj.id)
             if id == str(obj.id):
                 return obj
         return None

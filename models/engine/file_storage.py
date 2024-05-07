@@ -23,6 +23,7 @@ class FileStorage:
     def get(self, cls, id):
         """query for  one object"""
         for val in self.all(cls).values():
+            print(val.id, id)
             if cls == val.__class__ or cls == val.__class__.__name__:
                 if str(val.id) == id:
                     return val
