@@ -19,6 +19,8 @@ def places_by_city(city_id):
     if city_obj:
         for obj in city_obj.places:
             place_list.append(obj.to_dict())
+    else:
+        abort(404)
     return jsonify(place_list)
 
 
